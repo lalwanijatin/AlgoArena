@@ -19,6 +19,5 @@ EXPOSE 8080
 
 # Set an environment variable with a folder path
 ENV PROBLEMS_DIRECTORY=/app/problems
-COPY ../problems/ problems/
 
 CMD ["java","-jar","algoarena.jar"]
