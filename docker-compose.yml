@@ -22,7 +22,7 @@ services:
     volumes:
         - ./problem-set:/app/problems
     env_file:
-        ./judge0-v1.13.1/judge0.conf
+        ./judge0.conf
     restart: always
       
   server:
