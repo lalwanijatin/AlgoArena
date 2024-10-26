@@ -51,6 +51,7 @@ services:
     env_file: judge0.conf
     volumes:
       - data:/var/lib/postgresql/data/
+      - ./init_sql:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
     <<: *default-logging
