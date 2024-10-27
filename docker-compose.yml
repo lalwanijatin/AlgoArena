@@ -16,7 +16,7 @@ services:
     restart: always
 
   be:
-    build: /
+    build: algo-arena-be/
     ports:
         - "8080:8080"
     volumes:
