@@ -1,0 +1,23 @@
+## Problem: Sum of Elements in a List
+
+Given a list of integers, return the sum of all the elements in the list.
+
+### Input
+- A list of integers.
+
+### Output
+- A single integer, which is the sum of all the elements in the input list.
+
+### Example
+
+#### Example 1:
+**Input**: `[1, 2, 3, 4, 5]`
+**Output**: `15`
+
+#### Example 2:
+**Input**: `[-1, 0, 1]`
+**Output**: `0`
+
+### Constraints
+- The list may contain negative numbers.
+- The list is not guaranteed to be sorted.

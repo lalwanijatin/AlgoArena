@@ -1,0 +1,28 @@
+## Problem: Second Maximum
+
+### Problem Statement:
+Given a list of integers, your task is to write an algorithm that finds and returns the **second maximum** element in the list.
+
+### Input:
+- A list of integers, where the size of the list is always greater than 1.
+- All elements in the list may be distinct or contain duplicates.
+
+### Output:
+- Return the **second maximum** integer from the list.
+
+### Constraints:
+- The size of the list, `n`, will always be greater than 1: `n > 1`.
+- The elements in the list are not necessarily distinct.
+
+### Example:
+#### Example 1:
+```plaintext
+Input: arr = [3, 1, 4, 1, 5, 9]
+Output: 5
+Explanation: The largest element is 9, and the second largest is 5.
+
+#### Example 2:
+```plaintext
+Input: arr = [10, 20, 30, 40]
+Output: 30
+Explanation: The largest element is 40, and the second largest is 30.

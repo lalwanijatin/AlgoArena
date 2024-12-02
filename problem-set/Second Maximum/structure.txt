@@ -1,0 +1,6 @@
+Problem Name: "Second Maximum"
+Function Name: findSecondMax
+Input Structure:
+Input Field: list<int> arr
+Output Structure:
+Output Field: int result
