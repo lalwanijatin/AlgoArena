@@ -8,7 +8,7 @@ Ensure that **OpenSSL** is installed on your local machine. OpenSSL is required 
 
 1. Clone the repository:
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/lalwanijatin/AlgoArena.git
    ```
 
 2. Navigate to the resources directory:
