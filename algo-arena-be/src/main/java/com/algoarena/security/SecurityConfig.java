@@ -37,10 +37,10 @@ import java.security.interfaces.RSAPublicKey;
 @Configuration
 public class SecurityConfig {
 
-    @Value("${jwt.public.key}")
+    @Value("${jwt.public.key}") // This should bring the absolute class path
     RSAPublicKey key;
 
-    @Value("${jwt.private.key}")
+    @Value("${jwt.private.key}") // This should bring the absolute class path
     RSAPrivateKey priv;
 
     @Bean
@@ -53,15 +53,14 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(HttpMethod.POST, "/api/submit").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/generateBoilerplate/*/*").hasAuthority("SCOPE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/generateBoilerplate/*/*").hasAuthority("SCOPE_ADMIN") // SCOPE is the prefix for the roles. In the DB only "ADMIN" will be stored in the authorities table
                         .requestMatchers(HttpMethod.PUT, "/api/updateBoilerplate/*").hasAuthority("SCOPE_ADMIN")
                         .anyRequest().permitAll()
                 )
-                //.csrf((csrf) -> csrf.ignoringRequestMatchers("/token"))
                 .csrf(csrf -> csrf.disable())
-                .httpBasic(Customizer.withDefaults())
+                .httpBasic(Customizer.withDefaults()) // A simple authentication mechanism where the client sends a username and password encoded. HTTP Basic can be used initially to exchange the user's credentials (username and password) for a JWT token.
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
-                .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); // While JWT implies statelessness, explicitly configuring SessionCreationPolicy.STATELESS ensures no accidental session creation.
         return http.build();
     }
 
