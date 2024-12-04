@@ -57,7 +57,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/updateBoilerplate/*").hasAuthority("SCOPE_ADMIN")
                         .anyRequest().permitAll()
                 )
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable()) // CSRF protection if enabled expects a CSRF token in the request. But Since I am using JWT for authentication, JWT tokens are included in headers, not cookies, making them immune to CSRF attacks.
                 .httpBasic(Customizer.withDefaults()) // A simple authentication mechanism where the client sends a username and password encoded. HTTP Basic can be used initially to exchange the user's credentials (username and password) for a JWT token.
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); // While JWT implies statelessness, explicitly configuring SessionCreationPolicy.STATELESS ensures no accidental session creation.
