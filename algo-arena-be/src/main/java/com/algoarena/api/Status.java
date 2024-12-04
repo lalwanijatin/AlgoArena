@@ -15,7 +15,7 @@ import java.util.UUID;
 @RestController
 @AllArgsConstructor
 @NoArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173") // For testing in DEV env
 public class Status {
     @Autowired
     private SubmissionRepo submissionRepo;

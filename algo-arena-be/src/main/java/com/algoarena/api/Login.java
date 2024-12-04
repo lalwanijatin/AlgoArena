@@ -27,7 +27,7 @@ public class Login {
     JwtEncoder encoder;
 
     @PostMapping("/login")
-    @CrossOrigin(origins = "http://localhost:5173")
+    @CrossOrigin(origins = "http://localhost:5173") // For testing in DEV env
     public ResponseEntity<Map<String,String>> token() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Instant now = Instant.now();
