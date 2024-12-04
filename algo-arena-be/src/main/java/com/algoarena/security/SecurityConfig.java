@@ -27,12 +27,17 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 public class SecurityConfig {
@@ -58,10 +63,21 @@ public class SecurityConfig {
                         .anyRequest().permitAll()
                 )
                 .csrf(csrf -> csrf.disable()) // CSRF protection if enabled expects a CSRF token in the request. But Since I am using JWT for authentication, JWT tokens are included in headers, not cookies, making them immune to CSRF attacks.
+                .cors(Customizer.withDefaults()) // Enable CORS handling
                 .httpBasic(Customizer.withDefaults()) // A simple authentication mechanism where the client sends a username and password encoded. HTTP Basic can be used initially to exchange the user's credentials (username and password) for a JWT token.
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); // While JWT implies statelessness, explicitly configuring SessionCreationPolicy.STATELESS ensures no accidental session creation.
         return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:8080")); // Same origin
+        configuration.setAllowedMethods(Arrays.asList("*")); // Allowed HTTP methods
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration); // Apply to all endpoints
+        return source;
     }
 
     @Bean
