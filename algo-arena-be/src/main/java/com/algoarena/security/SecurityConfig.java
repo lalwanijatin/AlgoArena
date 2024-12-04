@@ -73,7 +73,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:8080")); // Same origin
+        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:8080")); // Same origin. Even though the Origin of the request and this backend is the same, this configuration is needed since it seems like Spring Security considers all requests that has 'Origin' header as the Cross Origin request. And it seems like browser adds Origin header for Post & Put requests.
         configuration.setAllowedMethods(Arrays.asList("*")); // Allowed HTTP methods
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration); // Apply to all endpoints
